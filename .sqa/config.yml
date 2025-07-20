@@ -1,0 +1,60 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/indigo-iam/iam:
+      branch: master
+      repo: https://github.com/indigo-iam/iam
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/indigo-iam/iam git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-puce-woodlouse.sh
+        container: qc.acc_stinky-silver-mongoose
+  QC.Doc:
+    repos:
+      github.com/indigo-iam/iam find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-alizarin-gar.sh
+        container: qc.doc_geeky-olivine-vulture
+      github.com/indigo-iam/iam git:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-cerulean-cow.sh
+        container: qc.doc_snazzy-amethyst-tortoise
+      github.com/indigo-iam/iam markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-beige-hummingbird.sh
+        container: qc.doc_cheeky-flax-mongoose
+  QC.Lic:
+    repos:
+      github.com/indigo-iam/iam licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-dandelion-kiwi.sh
+        container: qc.lic_whiny-xanthic-bracke
+  QC.Sty:
+    repos:
+      github.com/indigo-iam/iam checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-cornflower-zebra.sh
+        container: qc.sty_dorky-chestnut-frigatebird
+      github.com/indigo-iam/iam hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-ruby-shrew.sh
+        container: qc.sty_chewy-rust-kakapo
+      github.com/indigo-iam/iam jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-plum-ladybird.sh
+        container: qc.sty_muzzy-goldenrod-avocet
+  QC.Ver:
+    repos:
+      github.com/indigo-iam/iam get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.skanky-ruby-robin.sh
+        container: qc.ver_snappy-amaranth-akbash
+timeout: 5400
